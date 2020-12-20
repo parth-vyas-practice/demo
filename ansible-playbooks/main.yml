@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    terraform_project_path: ../terraform-code
+  vars_files:
+    - "./vars/{{ ENV }}_vars.yml" 
+  tasks:
+    - include: create-plan.yml
+      when: EXECUTION_TYPE == "plan"
+    - include: terraform-apply.yml
+      when: EXECUTION_TYPE == "apply"

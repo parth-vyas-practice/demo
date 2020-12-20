@@ -1,0 +1,8 @@
+terraform {
+  backend "s3" {
+    bucket  = "{{ backend_s3_bucket }}"
+    encrypt = true
+    key     = "{{ backend_s3_statefile_path }}"
+    region  = "{{ backend_s3_region }}"
+  }
+}

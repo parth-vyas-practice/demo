@@ -1,0 +1,12 @@
+- name: "create {{ ENV }} backend.tf file"
+  template:
+    src: backend.tf.j2
+    dest: "{{ terraform_project_path }}/backend.tf"
+
+- name: "create {{ ENV }} plan file"
+  terraform:
+    project_path: "{{ terraform_project_path }}/"
+    plan_file: "{{ terraform_project_path }}/plan-file"
+    state: planned
+    force_init: true
+    variables_file: "{{ terraform_project_path }}/{{ ENV }}.tfvars"
