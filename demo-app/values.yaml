@@ -1,0 +1,15 @@
+### deployment and service 
+appName: demo-app
+replicas: 1
+image: "accid.dkr.ecr.us-east-1.amazonaws.com/demo-app:latest"
+containerPort: 8080
+nodePort: 30000
+cpuLimit: 0.2
+cpuRequest: 0.1
+memoryLimit: 200Mi
+memoryRequest: 100Mi
+
+### hpa 
+hpa:
+  minReplicas: 1
+  maxReplicas: 4
