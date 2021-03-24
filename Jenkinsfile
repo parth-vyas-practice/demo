@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         APP_NAME = "demo-app"
-        ECR_REPO = "339146391262.dkr.ecr.us-east-1.amazonaws.com/test"
+        ECR_REPO = "test"
 
         TAG = "${BUILD_ID}-${GIT_COMMIT}"
 
@@ -38,8 +38,7 @@ pipeline {
             steps{
                 script{  
                     sh """ 
-                    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 339146391262.dkr.ecr.us-east-1.amazonaws.com
-                    docker push ${APP_IMAGE}
+                    echo 'push image stage'
                     """           
                 }
             }
@@ -48,7 +47,7 @@ pipeline {
             steps{
                 script{
                     sh"""
-                    bash ./helm-deployment.sh ${APP_NAME} ${APP_IMAGE}
+                    bash ./helm-deployment.sh ${APP_NAME} nginx:latest
                     """
                 }
             }
